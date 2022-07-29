@@ -1,0 +1,38 @@
+.search {
+  width: 500px;
+  height: 250px;
+  border: 5px solid rgba(49, 74, 75, 0.5);
+  border-radius: 10px;
+  margin: 320px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: rgba(203, 204, 204, 0.8);
+}
+
+.search__name_blue {
+  color: rgb(21, 137, 175);
+}
+
+.search__form {
+  width: 70%;
+}
+
+.search__input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 35px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.search_button {
+  text-align: center;
+  padding-top: 7px;
+  width: 200px;
+  height: 35px;
+  background-color: rgb(38, 139, 185);
+  text-decoration: none;
+  color: rgb(221, 247, 247);
+}
