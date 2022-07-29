@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import style from "./Header.module.css";
 import { Link } from "react-router-dom";
 
-const Header = ({ showSearch }) => {
-  const [search, setSearch] = useState("");
+const Header = ({ showSearch, handleSearch }) => {
   return (
     <div>
       {showSearch ? (
@@ -15,7 +14,7 @@ const Header = ({ showSearch }) => {
             type='text'
             placeholder='Search...'
             className={style.header__input}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
       ) : (
