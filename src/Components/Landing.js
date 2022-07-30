@@ -6,8 +6,7 @@ const Landing = ({ handleSearch }) => {
   const navigate = useNavigate();
   const [text, setText] = useState("");
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit() {
     handleSearch(text);
     navigate("/search");
     setText("");
