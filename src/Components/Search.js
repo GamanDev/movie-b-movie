@@ -1,67 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import data from "../../data.json";
 import Header from "./Header";
 import style from "./Search.module.css";
-import { Link } from "react-router-dom";
+
+import SearchResult from "./SearchResult";
 
 const Search = (props) => {
   const [shows] = useState(data.shows);
   const [search, setSearch] = useState(props.search);
+  console.log(shows);
 
   function handleSearch(text) {
     setSearch(text);
   }
 
-  console.log(data.shows);
+  const filteredShow = useMemo(() => {
+    return shows.filter(
+      (show) =>
+        `${show.title} ${show.description}`
+          .toUpperCase()
+          .indexOf(search.toUpperCase()) >= 0
+    );
+  }, [search]);
+
   return (
     <div>
       <Header showSearch={true} handleSearch={handleSearch} />
       <div className={style.list}>
         {search
-          ? shows
-              .filter(
-                (show) =>
-                  `${show.title} ${show.description}`
-                    .toUpperCase()
-                    .indexOf(search.toUpperCase()) >= 0
-              )
-              .map((show) => {
-                return (
-                  <Link to={`/search/${show.imdbID}`}>
-                    <div key={show.imdbID} className={style.list__items}>
-                      <img
-                        src={`/images/posters/${show.poster}`}
-                        alt='poster'
-                        className={style.list__poster}
-                        onClick={() => console.log(show.imdbID)}
-                      />
-                      <div className={style.list__description}>
-                        <h3>{show.title}</h3>
-                        <p>({show.year})</p>
-                        <p>{show.description}</p>
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })
+          ? filteredShow.map((show) => {
+              return <SearchResult show={show} />;
+            })
           : shows.map((show) => {
-              return (
-                <Link to={`/search/${show.imdbID}`}>
-                  <div key={show.imdbID} className={style.list__items}>
-                    <img
-                      src={`/images/posters/${show.poster}`}
-                      alt='poster'
-                      className={style.list__poster}
-                      onClick={() => console.log(show.imdbID)}
-                    />
-                    <div className={style.list__description}>
-                      <h3>{show.title}</h3>
-                      <p>({show.year})</p>
-                      <p>{show.description}</p>
-                    </div>
-                  </div>
-                </Link>
-              );
+              return <SearchResult show={show} />;
             })}
       </div>
     </div>

@@ -1,22 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import style from "./Header.module.css";
 import { Link } from "react-router-dom";
+import HeaderSearch from "./HeaderSearch";
 
 const Header = ({ showSearch, handleSearch }) => {
   return (
     <div>
       {showSearch ? (
-        <div className={style.header}>
-          <Link to='/' className={style.header__name}>
-            <h2>B-video</h2>
-          </Link>
-          <input
-            type='text'
-            placeholder='Search...'
-            className={style.header__input}
-            onChange={(e) => handleSearch(e.target.value)}
-          />
-        </div>
+        <HeaderSearch handleSearch={handleSearch} />
       ) : (
         <div className={style.header}>
           <Link to='/' className={style.header__name}>
