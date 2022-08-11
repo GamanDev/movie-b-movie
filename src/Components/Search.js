@@ -8,31 +8,33 @@ import SearchResult from "./SearchResult";
 const Search = (props) => {
   const [shows] = useState(data.shows);
   const [search, setSearch] = useState(props.search);
-  console.log(shows);
 
-  function handleSearch(text) {
-    setSearch(text);
-  }
+  console.log("Parent Search Component");
 
-  const filteredShow = useMemo(() => {
+  const searchShows = useMemo(() => {
+    const searchUpperCased = search.toUpperCase();
     return shows.filter(
       (show) =>
         `${show.title} ${show.description}`
           .toUpperCase()
-          .indexOf(search.toUpperCase()) >= 0
+          .indexOf(searchUpperCased) >= 0
     );
-  }, [search]);
+  }, [search, shows]);
+  // indexof => includes
 
+  function handleSearch(text) {
+    setSearch(text);
+  }
   return (
     <div>
       <Header showSearch={true} handleSearch={handleSearch} />
       <div className={style.list}>
         {search
-          ? filteredShow.map((show) => {
-              return <SearchResult show={show} />;
+          ? searchShows.map((show) => {
+              return <SearchResult key={show.imdbID} show={show} />;
             })
           : shows.map((show) => {
-              return <SearchResult show={show} />;
+              return <SearchResult key={show.imdbID} show={show} />;
             })}
       </div>
     </div>

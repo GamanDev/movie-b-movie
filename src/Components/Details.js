@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import data from "../../data.json";
 import style from "./Details.module.css";
@@ -6,8 +6,14 @@ import Header from "./Header";
 
 const Details = () => {
   const { id } = useParams();
-  const [movie] = useState(data.shows.find((show) => show.imdbID === id));
-  console.log(movie);
+  const movie = useMemo(
+    () => data.shows.find((show) => show.imdbID === id),
+    [id]
+  );
+
+  useEffect(() => {
+    console.log("movie");
+  }, [movie]);
 
   return (
     <div>

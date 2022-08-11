@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./Landing.module.css";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -12,11 +12,14 @@ const Landing = ({ handleSearch }) => {
     setText("");
   }
 
+  useEffect(() => {
+    handleSearch("");
+  }, []);
+
   return (
     <div className={style.search}>
       <h2 className={style.search__name_blue}>B-Video</h2>
       <form action='' className={style.search__form} onSubmit={handleSubmit}>
-        <label htmlFor='Search'></label>
         <input
           type='text'
           placeholder='Search...'

@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import style from "./Search.module.css";
 
-const SearchResult = ({ show }) => {
+const SearchResult = memo(({ show }) => {
   useEffect(() => {
-    console.log("SearchResult render");
+    console.log("Child SearchResult render");
   });
   return (
     <Link to={`/search/${show.imdbID}`}>
@@ -23,6 +23,6 @@ const SearchResult = ({ show }) => {
       </div>
     </Link>
   );
-};
+});
 
 export default SearchResult;
